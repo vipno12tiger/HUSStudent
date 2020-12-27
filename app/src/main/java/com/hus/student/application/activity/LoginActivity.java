@@ -21,7 +21,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.hus.student.application.R;
-import com.hus.student.application.object.AccountStudent;
 import com.hus.student.application.object.Const;
 import com.hus.student.application.object.Teacher;
 
@@ -29,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class HomeActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     private Toolbar toolbar;
 
 
@@ -52,7 +51,7 @@ public class HomeActivity extends AppCompatActivity {
         bt_login.setOnClickListener(v -> {
             if (!checkNetWork()) {
                 login(Objects.requireNonNull(edt_user.getText()).toString().trim(), Objects.requireNonNull(edt_password.getText()).toString().trim());
-            }else {
+            } else {
                 Toast.makeText(this, "Internet not connection", Toast.LENGTH_SHORT).show();
             }
         });
@@ -74,50 +73,40 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void login(String user, String password) {
-        if (isTeacher(user, password)) {
-            routerIfTeacher(user);
-        } else {
-            if (isStudent(user, password)) {
-                routerIfStudent(user);
-            }else {
-                Toast.makeText(this, "User or Password Wrong", Toast.LENGTH_SHORT).show();
-            }
+        if (!isSuccessful(user, password)) {
+            Toast.makeText(this, "User or Password Wrong", Toast.LENGTH_SHORT).show();
         }
-
     }
 
-    private void routerIfTeacher(String user) {
-        Intent intent = new Intent(HomeActivity.this, TeacherActivity.class);
-        intent.putExtra("user", user);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-    }
 
-    private void routerIfStudent(String user) {
-        Intent intent = new Intent(HomeActivity.this, StudentActivity.class);
-        intent.putExtra("user", user);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-    }
-
-    private boolean isStudent(String user, String password) {
-        for (Teacher teacher : teachers) {
-            for (AccountStudent accountStudent : teacher.getStudent()) {
-                if ((accountStudent.getEmail().equals(user) || (accountStudent.getMsv().equals(user))) && (accountStudent.getPassword().equals(password))) {
-                    return true;
+    private boolean isSuccessful(String user, String password) {
+        for (int i = 0; i < teachers.size(); i++) {
+            if ((teachers.get(i).getUser().equals(user)
+                    || (teachers.get(i).getEmail().equals(user) && (!teachers.get(i).getEmail().equals(""))))
+                    && (teachers.get(i).getPassword().equals(password))) {
+                Intent intent = new Intent(LoginActivity.this, TeacherActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.putExtra("user", teachers.get(i).getUser());
+                startActivity(intent);
+                finish();
+                return true;
+            } else {
+                for (int j = 0; j < teachers.get(i).getStudent().size(); j++) {
+                    if ((teachers.get(i).getStudent().get(j).getMsv().equals(user)
+                            || (teachers.get(i).getStudent().get(j).getEmail().equals(user) && (teachers.get(i).getStudent().get(j).getEmail() != null) && (!teachers.get(i).getStudent().get(j).getEmail().equals(""))))
+                            && (teachers.get(i).getStudent().get(j).getPassword().equals(password))) {
+                        Intent intent = new Intent(LoginActivity.this, StudentActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        intent.putExtra("user", teachers.get(i).getStudent().get(j).getMsv());
+                        intent.putExtra("root", teachers.get(i).getStudent().get(j).getRoot());
+                        startActivity(intent);
+                        finish();
+                        return true;
+                    }
                 }
             }
         }
 
-        return false;
-    }
-
-    private boolean isTeacher(String user, String password) {
-        for (Teacher teacher : teachers) {
-            if ((teacher.getEmail().equals(user) || (teacher.getUser().equals(user))) && (teacher.getPassword().equals(password))) {
-                return true;
-            }
-        }
         return false;
     }
 
@@ -144,7 +133,12 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
+                if(dataSnapshot.getValue()!=null){
+                    Teacher teacher = dataSnapshot.getValue(Teacher.class);
+                    if(teacher!=null){
+                        teachers.set(Integer.parseInt(Objects.requireNonNull(dataSnapshot.getKey())),teacher);
+                    }
+                }
             }
 
             @Override

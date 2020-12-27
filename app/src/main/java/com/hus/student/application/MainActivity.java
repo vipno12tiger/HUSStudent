@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-import com.hus.student.application.activity.HomeActivity;
+import com.hus.student.application.activity.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
     private final static int TIME_DELAY = 1000;
@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 Intent intent = new Intent();
-                intent.setClass(MainActivity.this, HomeActivity.class);
+                intent.setClass(MainActivity.this, LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".activity.HomeActivity">
+    tools:context=".activity.LoginActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -25,10 +25,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
         <androidx.core.widget.NestedScrollView
-            android:layout_gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -73,10 +75,11 @@
                     android:padding="5dp"
                     android:textColorHint="@color/gray"
                     app:hintEnabled="true"
-                    app:passwordToggleEnabled="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleTint="@color/gray"
                     app:startIconDrawable="@drawable/ic_baseline_lock_24"
                     app:startIconTint="@color/gray">
 
@@ -92,18 +95,18 @@
 
                 <Button
                     android:id="@+id/bt_login"
-                    android:textStyle="bold"
-                    android:textAllCaps="false"
-                    android:text="@string/login"
-                    android:textColor="@color/white"
-                    android:backgroundTint="@color/black"
-                    android:background="@drawable/drawable_text_input"
-                    android:layout_marginBottom="32dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="32dp"
                     android:layout_marginEnd="32dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_marginBottom="32dp"
+                    android:background="@drawable/drawable_text_input"
+                    android:backgroundTint="@color/black"
+                    android:text="@string/login"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
