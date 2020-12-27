@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "871587099071",
+    "project_id": "husstudent-com",
+    "storage_bucket": "husstudent-com.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:871587099071:android:ab32170d32783ba5feb10a",
+        "android_client_info": {
+          "package_name": "com.hus.student.application"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "871587099071-170ao0cu4js131j1u6iiu6plrirhkv5d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2ucS3DBgkG6QQJ_GcQuAmjvjRjH8ONao"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "871587099071-170ao0cu4js131j1u6iiu6plrirhkv5d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
