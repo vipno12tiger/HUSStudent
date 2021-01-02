@@ -12,16 +12,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents.Light.NoActionBar.Bridge">
-        <activity android:name=".activity.UserActivity"></activity>
-        <activity android:name=".activity.ChangeUserActivity" />
-        <activity android:name=".activity.StudentActivity" />
-        <activity android:name=".activity.TeacherActivity" />
+        <activity android:name=".activity.ToDoListActivity"></activity>
+        <activity android:name=".activity.ViewClassFundActivity" />
+        <activity android:name=".activity.ViewListStudentActivity" />
+        <activity android:name=".activity.UpdateProfileActivity" />
+        <activity android:name=".activity.SearchActivity" />
+        <activity android:name=".activity.ProfileActivity" />
+        <activity
+            android:name=".activity.StudentActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.TeacherActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.LoginActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.StartAppActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait">
             <intent-filter>

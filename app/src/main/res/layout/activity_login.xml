@@ -3,9 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/lo_login"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".activity.LoginActivity">
+    android:background="@drawable/kxuyupu"
+    android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -14,12 +15,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
-        app:title="Home"
-        app:titleTextColor="@color/black" />
+        app:title="@string/login"
+        app:titleTextColor="@color/white" />
 
     <FrameLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,83 +33,75 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="32dp"
-                    android:layout_marginEnd="32dp"
-                    android:background="@drawable/drawable_text_input"
-                    android:hint="@string/user"
+                    android:layout_margin="16dp"
+                    android:background="@drawable/drawable_rectangle"
                     android:padding="5dp"
-                    android:textColorHint="#808080"
+                    android:paddingStart="10dp"
                     app:hintEnabled="true"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/toolbar"
-                    app:startIconDrawable="@drawable/ic_baseline_account_circle_24"
-                    app:startIconTint="@color/gray">
+                    app:hintTextColor="@color/hint_color"
+                    app:startIconDrawable="@drawable/ic_baseline_person_24"
+                    app:startIconTint="@color/hint_color"
+                    tools:ignore="RtlSymmetry">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/edt_text"
+                        android:id="@+id/edt_user"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/drawable_text_input"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/user"
                         android:inputType="text"
                         android:padding="10dp"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/hint_color" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="32dp"
-                    android:layout_marginEnd="32dp"
-                    android:background="@drawable/drawable_text_input"
-                    android:hint="@string/password"
+                    android:layout_margin="16dp"
+                    android:background="@drawable/drawable_rectangle"
                     android:padding="5dp"
-                    android:textColorHint="@color/gray"
+                    android:paddingStart="10dp"
                     app:hintEnabled="true"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+                    app:hintTextColor="@color/hint_color"
                     app:passwordToggleEnabled="true"
-                    app:passwordToggleTint="@color/gray"
+                    app:passwordToggleTint="@color/hint_color"
                     app:startIconDrawable="@drawable/ic_baseline_lock_24"
-                    app:startIconTint="@color/gray">
+                    app:startIconTint="@color/hint_color"
+                    tools:ignore="RtlSymmetry">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/edt_password"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/drawable_text_input"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/password"
                         android:inputType="textPassword"
                         android:padding="10dp"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/hint_color" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
                     android:id="@+id/bt_login"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="32dp"
-                    android:layout_marginEnd="32dp"
-                    android:layout_marginBottom="32dp"
-                    android:background="@drawable/drawable_text_input"
+                    android:layout_margin="16dp"
+                    android:background="@drawable/drawable_rectangle"
                     android:backgroundTint="@color/black"
                     android:text="@string/login"
-                    android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textStyle="bold" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
-
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

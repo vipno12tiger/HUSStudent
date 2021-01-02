@@ -3,32 +3,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/layout"
+    android:background="@drawable/kxuyupu"
     android:layout_height="match_parent"
     tools:context=".activity.TeacherActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
+        app:menu="@menu/menu_home"
+        app:title="Unknown"
+        android:elevation="10dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        app:subtitleTextColor="@color/white"
+        app:titleTextColor="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
-        <androidx.cardview.widget.CardView
-            android:gravity='end|center_vertical'
-            android:layout_gravity="end"
-            app:cardCornerRadius="20dp"
-            android:layout_marginEnd="16sp"
-            android:layout_width="40dp"
-            android:layout_height="40dp">
-            <ImageView
-                android:scaleType="centerCrop"
-                android:id="@+id/iv_user"
-                android:layout_gravity="center"
-                android:adjustViewBounds="true"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:contentDescription="@string/user" />
-        </androidx.cardview.widget.CardView>
-    </androidx.appcompat.widget.Toolbar>
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_selection"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 </androidx.constraintlayout.widget.ConstraintLayout>

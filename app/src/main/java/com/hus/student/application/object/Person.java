@@ -1,18 +1,39 @@
 package com.hus.student.application.object;
 
-import java.util.UUID;
-
 public class Person {
-    private String name;
-    private String UUID;
+    private String name, email, phone,day;
+    private double GPA;
 
-
-    public Person() {
+    public Person(String name, String email, String phone, String day) {
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.day = day;
     }
 
-    public Person(String name, String UUID) {
+    public Person(String name, String email, String phone) {
         this.name = name;
-        this.UUID = UUID;
+        this.email = email;
+        this.phone = phone;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public double getGPA() {
+        return GPA;
+    }
+
+    public void setGPA(double GPA) {
+        this.GPA = GPA;
+    }
+
+    public Person() {
     }
 
     public String getName() {
@@ -23,14 +44,19 @@ public class Person {
         this.name = name;
     }
 
-    public void setUUID(String UUID) {
-        this.UUID = UUID;
+    public String getEmail() {
+        return email;
     }
 
-    public String getUUID() {
-        if (UUID == null) {
-            return java.util.UUID.randomUUID().toString();
-        }
-        return UUID;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }
