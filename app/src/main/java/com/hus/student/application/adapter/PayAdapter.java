@@ -1,5 +1,6 @@
 package com.hus.student.application.adapter;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,9 +41,11 @@ public class PayAdapter extends RecyclerView.Adapter<PayAdapter.PayHolder> {
         return new PayHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull PayHolder holder, int position) {
         holder.tv_title.setText(pays.get(position).getTitle());
+        holder.tv_price.setText(pays.get(position).getAmountOfMoney()+"");
         holder.tv_title.setOnClickListener(v -> onClickCollection.OnClick(v, Const.PAY, position));
         holder.itemView.setOnClickListener(v -> onClickCollection.OnClick(v, Const.PAY, position));
     }
@@ -56,12 +59,13 @@ public class PayAdapter extends RecyclerView.Adapter<PayAdapter.PayHolder> {
 
     public static class PayHolder extends RecyclerView.ViewHolder {
 
-        public TextView tv_title;
+        public TextView tv_title,tv_price;
 
         public PayHolder(@NonNull View itemView) {
             super(itemView);
 
             tv_title = itemView.findViewById(R.id.tv_title);
+            tv_price = itemView.findViewById(R.id.tv_price);
         }
     }
 }

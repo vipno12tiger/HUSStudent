@@ -55,7 +55,6 @@ public class ViewClassFundActivity extends AppCompatActivity implements OnClickC
     private PayAdapter payAdapter;
 
 
-
     private DatabaseReference refDb;
 
 
@@ -92,6 +91,36 @@ public class ViewClassFundActivity extends AppCompatActivity implements OnClickC
         EditText edt_title = view.findViewById(R.id.edt_title);
         EditText edt_amount = view.findViewById(R.id.edt_amount);
 
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(ViewClassFundActivity.this);
+        View viewPay = LayoutInflater.from(ViewClassFundActivity.this).inflate(R.layout.alert_collection, null);
+        alert.setView(viewPay);
+        AlertDialog alertDialog = alert.create();
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        alertDialog.setCanceledOnTouchOutside(false);
+        Button bt_cancel_pay = viewPay.findViewById(R.id.bt_cancel);
+        Button bt_confirm_pay = viewPay.findViewById(R.id.bt_confirm);
+        EditText edt_title_pay = viewPay.findViewById(R.id.edt_title);
+        EditText edt_amount_pay = viewPay.findViewById(R.id.edt_amount);
+
+
+        bt_cancel_pay.setOnClickListener(v -> alertDialog.dismiss());
+
+        bt_confirm_pay.setOnClickListener(v -> {
+            try {
+                if (edt_title_pay.getText().toString().trim().length() > 0 && edt_amount_pay.getText().toString().trim().length() > 0 && (Double.parseDouble(edt_amount_pay.getText().toString()) > 0)) {
+                    addPay(edt_title_pay.getText().toString(), Double.parseDouble(edt_amount_pay.getText().toString()));
+                }
+                alertDialog.dismiss();
+            } catch (Exception e) {
+                e.fillInStackTrace();
+            }
+        });
+
+
+        bt_add_pay.setOnClickListener(v -> alertDialog.show());
+
+
         bt_cancel.setOnClickListener(v -> dialog.dismiss());
 
         bt_confirm.setOnClickListener(v -> {
@@ -110,6 +139,23 @@ public class ViewClassFundActivity extends AppCompatActivity implements OnClickC
 
         loadClass();
         loadUser();
+    }
+
+    private void addPay(String title, double price) {
+        Pay pay = new Pay(title, price);
+
+        List<Pay> pays = cl.getPays();
+
+        if (pays == null) {
+            pays = new ArrayList<>();
+        }
+        pays.add(pay);
+        cl.setPays(pays);
+        refDb.child(Const.CLASS).child(codeClass).setValue(cl).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Toast.makeText(ViewClassFundActivity.this, "Success!", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 
@@ -186,12 +232,12 @@ public class ViewClassFundActivity extends AppCompatActivity implements OnClickC
 
     @Override
     public void OnClick(View view, String type, int position) {
-        if(type.equals(Const.COLLECTION)){
-            Intent intent = new Intent(ViewClassFundActivity.this,ToDoListActivity.class);
-            intent.putExtra("Api",Const.CLASS+"/"+codeClass+"/"+"collections"+"/"+position);
-            intent.putExtra("codeClass",codeClass);
-            intent.putExtra("position",""+position);
-            intent.putExtra("user",user);
+        if (type.equals(Const.COLLECTION)) {
+            Intent intent = new Intent(ViewClassFundActivity.this, ToDoListActivity.class);
+            intent.putExtra("Api", Const.CLASS + "/" + codeClass + "/" + "collections" + "/" + position);
+            intent.putExtra("codeClass", codeClass);
+            intent.putExtra("position", "" + position);
+            intent.putExtra("user", user);
             startActivity(intent);
         }
 
@@ -220,15 +266,15 @@ public class ViewClassFundActivity extends AppCompatActivity implements OnClickC
     private void showTotal(List<Pay> pays, List<Collection> collections) {
         double sum = 0;
         if (pays != null) {
-            for (Pay pay :pays) {
-                sum -=pay.getAmountOfMoney();
+            for (Pay pay : pays) {
+                sum -= pay.getAmountOfMoney();
             }
         }
         if (collections != null) {
-            for (Collection collection :collections) {
-               if(collection.getStudent()!=null){
-                   sum +=(collection.getCollection()*collection.getStudent().size());
-               }
+            for (Collection collection : collections) {
+                if (collection.getStudent() != null) {
+                    sum += (collection.getCollection() * collection.getStudent().size());
+                }
             }
         }
 

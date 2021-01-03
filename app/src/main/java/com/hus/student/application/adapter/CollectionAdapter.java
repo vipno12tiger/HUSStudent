@@ -1,5 +1,6 @@
 package com.hus.student.application.adapter;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,11 +43,13 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Co
         return new CollectionHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull CollectionHolder holder, int position) {
         holder.tv_title.setText(collections.get(position).getTitle());
+        holder.tv_price.setText(collections.get(position).getCollection()+"");
         holder.tv_title.setOnClickListener(v -> onClickCollection.OnClick(v, Const.COLLECTION, position));
-        holder.itemView.setOnClickListener(v -> onClickCollection.OnClick(v, Const.COLLECTION, position));
+        holder.tv_price.setOnClickListener(v -> onClickCollection.OnClick(v, Const.COLLECTION, position));
     }
 
     @Override
@@ -59,12 +62,13 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Co
 
     public static class CollectionHolder extends RecyclerView.ViewHolder {
 
-        public TextView tv_title;
+        public TextView tv_title,tv_price;
 
         public CollectionHolder(@NonNull View itemView) {
             super(itemView);
 
             tv_title = itemView.findViewById(R.id.tv_title);
+            tv_price = itemView.findViewById(R.id.tv_price);
         }
     }
 }
